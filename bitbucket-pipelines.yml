@@ -13,12 +13,14 @@ pipelines:
             caches:
               - node
             script:
+              - cd ui
               - npm install
               - npm test
         - step:
             name: Code linting
             script:
+              - cd ui
               - npm install eslint
-              - npx eslint .
+              - npm run lint
             caches:
               - node
