@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  api:
+    build:
+      context: ./api
+    image: carvin/api:latest
+    environment:
+      TZ: Etc/UTC
+    tty: true
+    volumes:
+      - ./api:/home/node/carvin/api
+    env_file: ./api/.env
+    ports:
+      - "0.0.0.0:3000:3000"
+      - "0.0.0.0:3443:3443"
+    networks:
+      backend:
+        aliases:
+          - api.carvin.local
+    depends_on:
+      - mongo
+      - mysql
+
+  front:
+    build:
+      context: ./ui
+    image: carvin/front:latest
+    environment:
+      TZ: Etc/UTC
+      API_HOST: api.carvin.local
+    tty: true
+    volumes:
+      - ./ui:/home/node/carvin/ui
+    ports:
+      - "0.0.0.0:4200:4200"
+    networks:
+      backend:
+        aliases:
+          - front.carvin.local
+    depends_on:
+      - api
+
+networks:
+  api:
+    driver: bridge

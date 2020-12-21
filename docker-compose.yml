@@ -1,0 +1,69 @@
+version: "3.8"
+
+services:
+  mongo:
+    build:
+      context: docker-assets/mongo/
+      dockerfile: Dockerfile
+      shm_size: "2gb"
+    image: carvin/mongo:latest
+    init: true
+    volumes:
+      - data_db_mongodb:/data/db
+      - var_lib_mongodb:/var/lib/mongodb
+      - var_log_mongodb:/var/log/mongodb
+    ports:
+      - "0.0.0.0:27017:27017"
+      - "0.0.0.0:27018:27018"
+      - "0.0.0.0:27019:27019"
+    networks:
+      - db
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 64000
+        hard: 64000
+    command: mongod --auth --port 27017 --wiredTigerCacheSizeGB 1.5
+    environment:
+      TZ: Etc/UTC
+      MONGO_INITDB_ROOT_USERNAME: "dev"
+      MONGO_INITDB_ROOT_PASSWORD: "devpass123!"
+      MONGO_INITDB_DATABASE: "carvin"
+    restart: always
+    tty: true
+
+  mysql:
+    image: carvin/mysql:latest
+    build:
+      context: ./docker-assets/mysql
+      args:
+        tz: Etc/UTC
+    environment:
+      MYSQL_ROOT_PASSWORD: 127656
+      MYSQL_ROOT_HOST: "%"
+      APP_ENV: local
+      TZ: Etc/UTC
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    restart: always
+    tty: true
+    ports:
+      - "0.0.0.0:3306:3306"
+      - "0.0.0.0:33060:33060"
+    env_file: ./docker-assets/mysql/.env
+    volumes:
+      - var_lib_mysql:/var/lib/mysql
+    cap_add:
+      - SYS_NICE  # CAP_SYS_NICE
+    networks:
+      - db
+
+networks:
+  db:
+    driver: bridge
+
+volumes:
+  data_db_mongodb:
+  var_lib_mongodb:
+  var_log_mongodb:
+  var_lib_mysql:
+  var_log_mysql:
