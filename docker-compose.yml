@@ -2,11 +2,12 @@ version: "3.8"
 
 services:
   mongo:
+    image: carvin/mongo:latest
     build:
       context: docker-assets/mongo/
       dockerfile: Dockerfile
       shm_size: "2gb"
-    image: carvin/mongo:latest
+    container_name: "carvin_mongo"
     init: true
     volumes:
       - data_db_mongodb:/data/db
@@ -34,10 +35,12 @@ services:
 
   mysql:
     image: carvin/mysql:latest
+    container_name: "carvin_mysql"
     build:
       context: ./docker-assets/mysql
       args:
         tz: Etc/UTC
+      shm_size: "2gb"
     environment:
       MYSQL_ROOT_PASSWORD: 127656
       MYSQL_ROOT_HOST: "%"

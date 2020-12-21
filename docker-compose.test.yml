@@ -37,7 +37,7 @@ services:
     networks:
       backend:
         aliases:
-          - front.carvin.local
+          - carvin.local
     depends_on:
       - api
 
