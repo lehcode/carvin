@@ -15,8 +15,6 @@ services:
       - var_log_mongodb:/var/log/mongodb
     ports:
       - "0.0.0.0:27017:27017"
-      - "0.0.0.0:27018:27018"
-      - "0.0.0.0:27019:27019"
     networks:
       - db
     ulimits:
@@ -42,9 +40,8 @@ services:
         tz: Etc/UTC
       shm_size: "2gb"
     environment:
-      MYSQL_ROOT_PASSWORD: 127656
+      MYSQL_ROOT_PASSWORD: "127656"
       MYSQL_ROOT_HOST: "%"
-      APP_ENV: local
       TZ: Etc/UTC
     command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     restart: always
