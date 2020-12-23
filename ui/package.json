@@ -11,10 +11,8 @@
     "e2e": "jest --config ./test/jest-e2e.json",
     "lint": "ng lint --type-check",
     "start": "ng serve --host 0.0.0.0 --publicHost=carvin.local --port 4300",
-    "test": "jest",
-    "test:ci": "jest --runInBand",
-    "test:coverage": "jest --coverage",
-    "test:watch": "jest --watch"
+    "test": "ng test ui",
+    "test:watch": "ng test ui --reporters dots,kjhtml --browsers Chrome --watch"
   },
   "dependencies": {
     "@angular/animations": "~11.0.5",
@@ -29,6 +27,7 @@
     "@angular/platform-server": "^11.0.5",
     "@angular/router": "~11.0.5",
     "@nguniversal/express-engine": "^11.0.1",
+    "karma-html-reporter": "^0.2.7",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
@@ -43,7 +42,6 @@
     "@angular/cli": "~11.0.5",
     "@angular/compiler-cli": "~11.0.5",
     "@types/jasmine": "^3.6.2",
-    "@types/jest": "^26.0.19",
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "4.3.0",
     "@typescript-eslint/parser": "4.3.0",
@@ -56,11 +54,9 @@
     "husky": "^4.3.6",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
-    "jest": "^26.6.3",
-    "jest-preset-angular": "^8.3.2",
     "karma": "~5.1.0",
     "karma-chrome-launcher": "~3.1.0",
-    "karma-coverage": "~2.0.3",
+    "karma-coverage": "^2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
     "prettier": "^2.2.1",
