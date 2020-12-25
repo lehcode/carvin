@@ -12,7 +12,7 @@
     "lint": "ng lint --type-check",
     "start": "ng serve --host 0.0.0.0 --publicHost=carvin.local --port 4300",
     "test": "ng test ui",
-    "test:watch": "ng test ui --reporters dots,kjhtml --browsers Chrome --watch"
+    "test-watch": "ng test ui --reporters dots,kjhtml --browsers Chrome --watch"
   },
   "dependencies": {
     "@angular/animations": "~11.0.5",
@@ -27,6 +27,7 @@
     "@angular/platform-server": "^11.0.5",
     "@angular/router": "~11.0.5",
     "@nguniversal/express-engine": "^11.0.1",
+    "express": "^4.15.2",
     "karma-html-reporter": "^0.2.7",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
@@ -47,6 +48,7 @@
     "@typescript-eslint/parser": "4.3.0",
     "eslint": "^7.6.0",
     "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-html": "^6.1.1",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "30.7.6",
     "eslint-plugin-prefer-arrow": "1.2.2",
