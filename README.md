@@ -1,8 +1,8 @@
-# Carvin project
+# Car VIN Code Decoder
 
+The decoder uses the NHTSA database to retrieve information about a car by its VIN code.
 
-
-### Start
+## Start
 
 ```
 $ docker compose up --build
